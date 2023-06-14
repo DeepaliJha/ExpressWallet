@@ -5,6 +5,15 @@ import { Account } from '../../models/Account';
 import AccountTransactions from './AccountTransactions';
 import { ethers } from 'ethers';
 import { toFixedIfNecessary } from '../../utils/AccountUtils';
+import fiftyrupee from "./fiftyrupees.jpg";
+import fiftycoin from "./fiftycoinneww.jpg";
+import fivehundred from "./fivehundredrupees.jpg";
+import fiverupees from "./fiverupees.jpg";
+import hundredrupees from "./hundredrupees.jpg";
+import onerupees from "./onerupeesnew.jpg";
+import twohundredrupees from "./twohundredrupees.jpg";
+import tworupees from "./tworupees.jpg";
+import twothousandrupees from "./twothousandrupees.jpg";
 import './Account.css';
 
 import expressPayLogo from './expressPayLogo.jpg'; // Import the Express Wallet logo image
@@ -37,6 +46,10 @@ const AccountDetail: React.FC<AccountDetailProps> = ({ account }) => {
 
   function handleDestinationAddressChange(event: React.ChangeEvent<HTMLInputElement>) {
     setDestinationAddress(event.target.value);
+  }
+  
+  function handleAmountImageClick(value: number) {
+    setAmount(value);
   }
 
   function handleAmountChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -107,6 +120,23 @@ const AccountDetail: React.FC<AccountDetailProps> = ({ account }) => {
           value={destinationAddress}
           onChange={handleDestinationAddressChange}
         />
+      </div>
+      <div className="amount-images-container">
+        <div className="rupee-notes">
+          <img src={fivehundred} alt="500 Rupee Note" onClick={() => handleAmountImageClick(500)} />
+          <img src={fiftyrupee} alt="50 Rupee Note" onClick={() => handleAmountImageClick(50)} />
+          <img src={fiverupees} alt="5 Rupee Note" onClick={() => handleAmountImageClick(5)} />
+          <img src={hundredrupees} alt="100 Rupee Note" onClick={() => handleAmountImageClick(100)} />
+          <img src={twohundredrupees} alt="200 Rupee Note" onClick={() => handleAmountImageClick(200)} />
+          <img src={tworupees} alt="2 Rupee Note" onClick={() => handleAmountImageClick(2)} />
+          <img src={twothousandrupees} alt="2000 Rupee Note" onClick={() => handleAmountImageClick(2000)} />
+        </div>
+        <div className="coin-notes">
+          <div className="coin-images-row">
+            <img src={onerupees} alt="1 Rupee coin" onClick={() => handleAmountImageClick(1)} />
+            <img src={fiftycoin} alt="50 Paisa coin" onClick={() => handleAmountImageClick(0.5)} />
+          </div>
+        </div>
       </div>
 
       <div className="form-group">

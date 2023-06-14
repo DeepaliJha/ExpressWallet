@@ -63,3 +63,37 @@ body {
   width: 20px;
   height: 20px;
 }
+.amount-images-container .rupee-notes img,
+.amount-images-container .coin-notes img {
+  cursor: pointer;
+}
+.amount-images-container .coin-notes img {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+}
+.amount-images-container .rupee-notes img {
+  width: 50px;
+  height: 85px;
+  margin: 5px;
+}
+
+.amount-images-container .coin-notes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.amount-images-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.amount-images-container .rupee-notes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
