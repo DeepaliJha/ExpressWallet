@@ -11,7 +11,8 @@ input.form-control {
 }
 
 .btn {
-  margin: 5px
+  margin: 5px;
+  background-color: #FC5185;
 }
 
 .App-logo {
