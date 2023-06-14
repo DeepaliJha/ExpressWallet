@@ -70,12 +70,12 @@ function AccountCreate() {
         Express Wallet
       </h1>
       <form onSubmit={event => event.preventDefault()}>
-        <button type="button" className="btn btn-primary" onClick={createAccount}>
+        <button type="button" className="btn" onClick={createAccount}>
           Create Account
         </button>
         {/* Add a button to toggle showing the recover account input and button */}
         {/* If show recover input is visible, clicking the button again will submit the phrase in the input */}
-        <button type="button" className="btn btn-outline-primary ml-3"
+        <button type="button" className="btn"
           onClick={() => showRecoverInput ? recoverAccount(seedphrase) : setShowRecoverInput(true)}
           // if the recoveryinput is showing but there is no seedphrase, disable the ability to recover account
           disabled={showRecoverInput && !seedphrase}

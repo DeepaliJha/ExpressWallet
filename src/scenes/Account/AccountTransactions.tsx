@@ -54,7 +54,7 @@ const AccountTransactions: React.FC<AccountTransactionsProps> = ({ account }) =>
             {networkResponse.status === "complete" && transactions.length === 0 && (
                 <p>No transactions found for this address</p>
             )}
-            <button type="button" className="btn btn-primary" onClick={getTransactions} disabled={networkResponse.status==="pending"}>
+            <button type="button" className="btn" onClick={getTransactions} disabled={networkResponse.status==="pending"}>
             Refresh Transactions
             </button>
             {/* Show the network response status and message */}

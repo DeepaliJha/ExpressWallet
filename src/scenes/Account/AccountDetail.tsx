@@ -113,7 +113,7 @@ const AccountDetail: React.FC<AccountDetailProps> = ({ account }) => {
       </div>
 
       <button
-        className="btn btn-primary"
+        className="btn"
         type="button"
         onClick={transfer}
         disabled={!amount || networkResponse.status === 'pending'}

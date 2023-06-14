@@ -4,7 +4,6 @@
   max-width: 100%;
 }
 
-
 input.form-control {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -13,6 +12,12 @@ input.form-control {
 .btn {
   margin: 5px;
   background-color: #FC5185;
+  border: 1px solid pink; /* Updated border color */
+}
+
+.btn:hover {
+  background-color: pink; /* Hover color */
+  border-color: pink; /* Hover border color */
 }
 
 .App-logo {
@@ -49,7 +54,7 @@ input.form-control {
     transform: rotate(360deg);
   }
 }
+
 body {
   background-color: pink;
 }
-
