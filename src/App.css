@@ -48,3 +48,7 @@ input.form-control {
     transform: rotate(360deg);
   }
 }
+body {
+  background-color: pink;
+}
+
