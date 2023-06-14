@@ -103,23 +103,28 @@ const AccountDetail: React.FC<AccountDetailProps> = ({ account }) => {
 
   return (
     <div className="AccountDetail container" >
+      <h4 className="fancy-balance">
+  <span className="fancy-line-left"></span>
+  Erupee Balance : {balance} e<span className="WebRupee">&#x20B9;</span>
+  <span className="fancy-line-right"></span>
+</h4>
+      
       <h4>
-        <img src={expressPayLogo} alt="Express Wallet Logo" className="express-wallet-logo" /> Address:{' '}
+        <img src={expressPayLogo} alt="Express Wallet Logo" className="express-wallet-logo" /> My Address:{' '}
         <a href={`https://goerli.etherscan.io/address/${account.address}`} target="_blank" rel="noreferrer">
           {account.address}
         </a>
         <br />
-        Balance: {balance} e<span className="WebRupee">&#x20B9;</span>
-      </h4>
+       </h4>
 
       <div className="form-group">
-        <label>Destination Address:</label>
+        <label>Receiver's Address:</label>
         <input
-          className="form-control"
-          type="text"
-          value={destinationAddress}
-          onChange={handleDestinationAddressChange}
-        />
+  className="form-control fancy-input"
+  type="text"
+  value={destinationAddress}
+  onChange={handleDestinationAddressChange}
+/>
       </div>
       <div className="amount-images-container">
         <div className="rupee-notes">
@@ -141,7 +146,7 @@ const AccountDetail: React.FC<AccountDetailProps> = ({ account }) => {
 
       <div className="form-group">
         <label>Amount:</label>
-        <input className="form-control" type="number" value={amount} onChange={handleAmountChange} />
+        <input className="form-control fancy-input" type="number" value={amount} onChange={handleAmountChange} />
       </div>
 
       <button
@@ -152,6 +157,7 @@ const AccountDetail: React.FC<AccountDetailProps> = ({ account }) => {
       >
         Send {amount} e<span className="WebRupee">&#x20B9;</span>
       </button>
+      <hr />
 
       {networkResponse.status && (
         <>
@@ -160,6 +166,7 @@ const AccountDetail: React.FC<AccountDetailProps> = ({ account }) => {
           {networkResponse.status === 'error' && (
             <p>Error occurred while transferring tokens: {networkResponse.message}</p>
           )}
+          
         </>
       )}
 

@@ -6,18 +6,12 @@ import AccountDetail from './AccountDetail';
 const recoveryPhraseKeyName = 'recoveryPhrase';
 
 function AccountCreate() {
-  // Declare a new state variable, which we'll call "seedphrase"
   const [seedphrase, setSeedphrase] = useState('');
-
-  // Declare a new state variable, which we'll call "account"
   const [account, setAccount] = useState<Account | null>(null);
-
-  // Declare a new state variable, which we'll call "showRecoverInput"
-  // and initialize it to false
   const [showRecoverInput, setShowRecoverInput] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    // Update the seedphrase state with the value from the text input
     setSeedphrase(event.target.value);
   }
 
@@ -26,78 +20,83 @@ function AccountCreate() {
       event.preventDefault();
       recoverAccount(seedphrase);
     }
-  }
+  };
 
-  const recoverAccount = useCallback(
-    // recoverAccount could be used without recoveryPhrase as an arguement but then we would have to
-    // put it in a deps array.
-    async (recoveryPhrase: string) => {
+  const recoverAccount = useCallback(async (recoveryPhrase: string) => {
+    const result = await generateAccount(recoveryPhrase);
+    setAccount(result.account);
 
-      // Call the generateAccount function with no arguments
-      // Call the generateAccount function and pass it 0 and the current seedphrase
-      const result = await generateAccount(recoveryPhrase);
-
-      // Update the account state with the newly recovered account
-      setAccount(result.account);
-
-      if (localStorage.getItem(recoveryPhraseKeyName) !== recoveryPhrase) {
-        localStorage.setItem(recoveryPhraseKeyName, recoveryPhrase);
-      }
-
-    }, []
-  );
+    if (localStorage.getItem(recoveryPhraseKeyName) !== recoveryPhrase) {
+      localStorage.setItem(recoveryPhraseKeyName, recoveryPhrase);
+    }
+  }, []);
 
   useEffect(() => {
-
-    const localStorageRecoveryPhrase = localStorage.getItem(recoveryPhraseKeyName)
+    const localStorageRecoveryPhrase = localStorage.getItem(recoveryPhraseKeyName);
     if (localStorageRecoveryPhrase) {
       setSeedphrase(localStorageRecoveryPhrase);
       recoverAccount(localStorageRecoveryPhrase);
     }
-  }, [recoverAccount])
+  }, [recoverAccount]);
 
   async function createAccount() {
-    // Call the generateAccount function with no arguments
     const result = await generateAccount();
-
-    // Update the account state with the newly created account
     setAccount(result.account);
   }
 
   return (
     <div className='AccountCreate p-5 m-3 card shadow'>
-      <h1>
-        Express Wallet
-      </h1>
+      <h1>Express Wallet</h1>
       <form onSubmit={event => event.preventDefault()}>
-        <button type="button" className="btn" onClick={createAccount}>
+        <button type="button" className="btn" onClick={createAccount} disabled={!termsAccepted}>
           Create Account
         </button>
-        {/* Add a button to toggle showing the recover account input and button */}
-        {/* If show recover input is visible, clicking the button again will submit the phrase in the input */}
-        <button type="button" className="btn"
+        <button
+          type="button"
+          className="btn"
           onClick={() => showRecoverInput ? recoverAccount(seedphrase) : setShowRecoverInput(true)}
-          // if the recoveryinput is showing but there is no seedphrase, disable the ability to recover account
           disabled={showRecoverInput && !seedphrase}
         >
-          Recover account
+          Recover Account
         </button>
-        {/* Show the recover account input and button if showRecoverInput is true */}
         {showRecoverInput && (
           <div className="form-group mt-3">
-            <input type="text" placeholder='Seedphrase or private key for recovery' className="form-control"
-              value={seedphrase} onChange={handleChange} onKeyDown={handleKeyDown} />
+            <input
+              type="text"
+              placeholder='Enter the unique Seedphrase or private key'
+              className="form-control"
+              value={seedphrase}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+            />
+          </div>
+        )}
+        {account ? (
+          <>
+            <hr />
+            <AccountDetail account={account} />
+          </>
+        ) : (
+          <div className="terms">
+            <p>Please accept the terms and conditions to create an account</p>
+            <div className="toggle-container">
+              <label htmlFor="termsToggle" className={`toggle-label ${termsAccepted ? 'accepted' : ''}`}>
+                <span className="toggle-label-text">No</span>
+                <div className={`toggle-button ${termsAccepted ? 'accepted' : ''}`} />
+                <input
+                  type="checkbox"
+                  id="termsToggle"
+                  className="sr-only"
+                  onChange={(e) => setTermsAccepted(e.target.checked)}
+                />
+                <span className="toggle-label-text">Yes</span>
+              </label>
+            </div>
           </div>
         )}
       </form>
-      {account &&
-        <>
-          <hr />
-          <AccountDetail account={account} />
-        </>
-      }
     </div>
-  )
-
+  );
 }
+
 export default AccountCreate;
