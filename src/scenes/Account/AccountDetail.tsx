@@ -109,7 +109,7 @@ const AccountDetail: React.FC<AccountDetailProps> = ({ account }) => {
           {account.address}
         </a>
         <br />
-        Balance: {balance} ETH
+        Balance: {balance} e<span className="WebRupee">&#x20B9;</span>
       </h4>
 
       <div className="form-group">
@@ -150,7 +150,7 @@ const AccountDetail: React.FC<AccountDetailProps> = ({ account }) => {
         onClick={transfer}
         disabled={!amount || networkResponse.status === 'pending'}
       >
-        Send {amount} ETH
+        Send {amount} e<span className="WebRupee">&#x20B9;</span>
       </button>
 
       {networkResponse.status && (
