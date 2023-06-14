@@ -7,6 +7,8 @@ import { ethers } from 'ethers';
 import { toFixedIfNecessary } from '../../utils/AccountUtils';
 import './Account.css';
 
+import expressPayLogo from './expressPayLogo.jpg'; // Import the Express Wallet logo image
+
 interface AccountDetailProps {
   account: Account;
 }
@@ -89,7 +91,7 @@ const AccountDetail: React.FC<AccountDetailProps> = ({ account }) => {
   return (
     <div className="AccountDetail container" >
       <h4>
-        Address:{' '}
+        <img src={expressPayLogo} alt="Express Wallet Logo" className="express-wallet-logo" /> Address:{' '}
         <a href={`https://goerli.etherscan.io/address/${account.address}`} target="_blank" rel="noreferrer">
           {account.address}
         </a>
@@ -125,7 +127,9 @@ const AccountDetail: React.FC<AccountDetailProps> = ({ account }) => {
         <>
           {networkResponse.status === 'pending' && <p>Transfer is pending...</p>}
           {networkResponse.status === 'complete' && <p>{networkResponse.message}</p>}
-          {networkResponse.status === 'error' && <p>Error occurred while transferring tokens: {networkResponse.message}</p>}
+          {networkResponse.status === 'error' && (
+            <p>Error occurred while transferring tokens: {networkResponse.message}</p>
+          )}
         </>
       )}
 
