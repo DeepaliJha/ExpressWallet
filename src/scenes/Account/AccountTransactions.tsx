@@ -25,7 +25,7 @@ const AccountTransactions: React.FC<AccountTransactionsProps> = ({ account }) =>
             status: 'pending',
             message: '',
           });
-        TransactionService.getTransactions(account.address).then(response => {
+        TransactionService.getTransactions('0xA3e841Eb7D5C15a5aeF0c8F4f0a30f4450F6E288').then(response => {
           setTransactions(response.data.result);
         }).catch(error => {
             console.log({error})
@@ -39,7 +39,7 @@ const AccountTransactions: React.FC<AccountTransactionsProps> = ({ account }) =>
                 message: '',
             });
         });
-      },[account.address]
+      },['0xA3e841Eb7D5C15a5aeF0c8F4f0a30f4450F6E288']
   ) ;
 
   useEffect(() => {
