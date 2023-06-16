@@ -7,6 +7,7 @@ import { TransactionService } from '../../services/TransactionService';
 import { shortenAddress } from '../../utils/AccountUtils';
 
 type AccountTransactionsProps = {
+    
   account: Account,
 };
 
